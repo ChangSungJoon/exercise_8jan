@@ -8,7 +8,7 @@ reg=pickle.load(pickle_in)
 
 
 def predict_note_authentication(variance,skewness):
-    prediction=classifier.predict([[variance,skewness]])
+    prediction=reg.predict([[variance,skewness]])
     print(prediction)
     return prediction
 
