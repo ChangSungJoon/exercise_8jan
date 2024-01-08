@@ -4,27 +4,27 @@ import pandas as pd
 import streamlit as st 
 
 pickle_in = open("reg_RF.pkl","rb")
-reg=pickle.load(pickle_in)
+reg_RF=pickle.load(pickle_in)
 
 
-def predict_note_authentication(variance,skewness):
-    prediction=reg.predict([[variance,skewness]])
+def predict_std_perf(hour_s,pre_score):
+    prediction=reg_RF.predict([[hour_s,pre_score]])
     print(prediction)
     return prediction
 
 def main():
-    st.title("Bank Authenticator")
+    st.title("Student Performance Prediction")
     html_temp = """
     <div style="background-color:tomato;padding:10px">
-    <h2 style="color:white;text-align:center;">Streamlit Bank Authenticator ML App </h2>
+    <h2 style="color:white;text-align:center;">Streamlit Student Performance ML App </h2>
     </div>
     """
     st.markdown(html_temp,unsafe_allow_html=True)
-    variance = st.text_input("variance","Type Here")
-    skewness = st.text_input("skewness","Type Here")
+    hour_s = st.text_input("hour of study","Type Here")
+    pre_score = st.text_input("previous score","Type Here")
     result=""
     if st.button("Predict"):
-        result=predict_note_authentication(variance,skewness)
+        result=predict_std_perf(hour_s,pre_score)
     st.success('The output is {}'.format(result))
     if st.button("About"):
         st.text("Lets Learn Python")
